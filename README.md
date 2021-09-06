@@ -4,6 +4,8 @@ To run the project:
  - `yarn`
  - `yarn test` or `yarn test:watch` (recommended)
 
+`git checkout section1` for each section and read the note below to see what changes in each section.
+
 I've committed new branches at certain points of the kata to highlight important points.  I would recommend trying this kata in a TDD fashion yourself not to solve the problem but to get a feel for how the flow of TDD works.  In real life we may never TDD due to problems not being well defined and understood well enough, however even in this small problem space like the checkout kata it's hard to stay disciplined in the act of TDD.
 
 It is something that has to be experienced but I hope these notes help and highlight important aspects of it.
