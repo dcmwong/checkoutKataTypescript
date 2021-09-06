@@ -2,6 +2,7 @@ import { describe, it } from 'mocha'
 import { expect } from 'chai'
 import Checkout from './Checkout'
 import Inventory from './inventory'
+import Discounts, { discountRules } from './discounts'
 
 describe('Checkout', () => {
   let checkout: Checkout
@@ -13,7 +14,8 @@ describe('Checkout', () => {
       { item: 'D', price: 15 }
     ]
 
-    checkout = new Checkout(inventory)
+    const discountRules: discountRules[] = [{ item: 'A', noOfItems: 3, discountAmount: 20 }]
+    checkout = new Checkout(inventory, new Discounts(discountRules))
   })
   afterEach(() => {})
 
@@ -48,5 +50,22 @@ describe('Checkout', () => {
     checkout.scan('C')
     const total = checkout.total()
     expect(total).to.eq(20)
+  })
+  it('should total 3 As and give me a discount', () => {
+    checkout.scan('A')
+    checkout.scan('A')
+    checkout.scan('A')
+    const total = checkout.total()
+    expect(total).to.eq(130)
+  })
+  it('should total 6 As and give me a discount', () => {
+    checkout.scan('A')
+    checkout.scan('A')
+    checkout.scan('A')
+    checkout.scan('A')
+    checkout.scan('A')
+    checkout.scan('A')
+    const total = checkout.total()
+    expect(total).to.eq(260)
   })
 })
