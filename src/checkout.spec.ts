@@ -10,11 +10,6 @@ describe('Checkout', () => {
   })
   afterEach(() => {})
 
-  it('should total zero when no items scanned', () => {
-    const total = checkout.total()
-    expect(total).to.eq(0)
-  })
-
   it('should total a line item A', () => {
     checkout.scan('A')
     const total = checkout.total()
