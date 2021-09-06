@@ -14,7 +14,10 @@ describe('Checkout', () => {
       { item: 'D', price: 15 }
     ]
 
-    const discountRules: discountRules[] = [{ item: 'A', noOfItems: 3, discountAmount: 20 }]
+    const discountRules: discountRules[] = [
+      { item: 'A', noOfItems: 3, discountAmount: 20 },
+      { item: 'B', noOfItems: 2, discountAmount: 15 }
+    ]
     checkout = new Checkout(inventory, new Discounts(discountRules))
   })
   afterEach(() => {})
@@ -67,5 +70,20 @@ describe('Checkout', () => {
     checkout.scan('A')
     const total = checkout.total()
     expect(total).to.eq(260)
+  })
+  it('should total 2 2Bs and give me a discount', () => {
+    checkout.scan('B')
+    checkout.scan('B')
+    const total = checkout.total()
+    expect(total).to.eq(45)
+  })
+  it('should total 3 As and 2Bs and give me a discount', () => {
+    checkout.scan('A')
+    checkout.scan('A')
+    checkout.scan('A')
+    checkout.scan('B')
+    checkout.scan('B')
+    const total = checkout.total()
+    expect(total).to.eq(175)
   })
 })
