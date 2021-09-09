@@ -6,7 +6,7 @@ class Checkout {
   _total: number = 0
 
   scan(item: string) {
-    this._total = 20
+    this._total = 50
   }
   total(): number {
     return this._total
@@ -18,6 +18,6 @@ describe('Checkout', () => {
     const checkout = new Checkout()
     checkout.scan('A')
     const total = checkout.total()
-    expect(total).to.eq(20)
+    expect(total).to.eq(50)
   })
 })
